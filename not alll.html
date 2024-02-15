@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>notlarss</title>
+  <style>
+    /* yazılan harf sayısı */
+    #ksayısı{
+      /* kaydırınca sabit bir şekilde kalır */
+      position: fixed;
+      right: 10px;
+      top: 20px;
+    }
+    /* yazı yazılan yer */
+    #yazı{
+      position: absolute;
+      top: 35px;
+      left: 500px;
+      height: 700px;
+      width: 550px;
+      
+    }
+    /* kaydet buttonu */
+    #k{
+       /* kaydırınca sabit bir şekilde kalır */
+      position: fixed;
+      top: 25px;
+      right: 20px;
+      
+    }
+    /* açılır menü */
+    #menu{
+      position: absolute;
+      top: 50px;
+      right: 10px;
+    }
+
+    /*açılır menünnü içi */
+    .blm{
+    
+      text-decoration:none;
+      color: black;
+
+    }
+    /* indirme buttonu */
+    #indr{
+      position: absolute;
+      bottom: 10px;
+      left: 20px;
+    }
+
+    /* sağ tarafta yeni  oluşturma */
+    #sl{
+      position: absolute;
+      top: 100px;
+      left: 30px;
+    }
+    #sll{
+      position: absolute;
+      top: 340px;
+      right: 3px;
+    }
+  </style>
+</head>
+<body>
+  <marquee  direction="right"  >dik durmayı unutma </marquee>
+  <marquee  direction="left">su içmeyi unutma</marquee>
+
+  
+  <!-- indirme düğmesi -->
+  <button id="indr" onclick="ın()"> indir</button>
+
+  
+  <details id="menu">
+    <summary>yazılarım</summary>
+   
+  <div contenteditable="true" >
+
+    <textarea  id="ilk" cols="30" rows="10"></textarea><br>
+    <textarea  id="ıkı" cols="30" rows="10"></textarea>
+    <!-- sağ tarafta yeni yer ouşturma -->
+  
+  
+  <button  id="sll" onclick="olş()">oluştur </button>
+
+
+  </div>
+  
+</details>
+  <!-- kaydet -->
+  <button onclick="kyd()" id="k">kaydet</button>
+  <!-- yazı yazılacak yer -->
+  <textarea  id="yazı" placeholder="notlarımmm" cols="30" rows="10"></textarea>
+  <p id="ksayısı" ></p>
+  <script>
+    /* yazıları kaydetme */
+    document.addEventListener("DOMContentLoaded",function(){
+     var yazılarım= localStorage.getItem("yazı");
+      if(yazılarım){
+        document.getElementById("yazı").value=yazılarım;
+      }
+    });
+    function kyd(){
+      var yazıyeri= document.getElementById("yazı").value;
+      localStorage.setItem("yazı", yazıyeri);
+      alert("yarrram kaydetti ne bakıyon");
+
+       /* yazılan harf sayısı */
+      var yazıyeri= document.getElementById("yazı").value;
+    var ksayısı=document.getElementById("ksayısı").innerHTML=yazıyeri.length
+     
+    }
+
+    /*   indirme düğmesi  */
+    function ın(){
+      var ındur= document.getElementById("yazı").value;
+
+    
+      var blob= new Blob([ındur], {type: "text/playne"});
+      
+    /* æaçıklana bilir bir url  */
+   var url=window.URL.createObjectURL(blob);
+
+   var a = document.createElement("a");
+  /* indirme bağlantıları */
+  a.href=url;
+  a.download="metin.txt";/* indirme dosya adı */
+  a.click();
+
+    }
+
+    /* yeni metin oluşturma  sağ taraf*/
+ 
+      document.addEventListener("DOMContentLoaded", function(){
+      
+       
+      var sl=  localStorage.getItem("sl");
+       if(sl){
+     
+        document.getElementById("ilk").value=sl;
+      
+       }
+
+
+      });
+      function olş(){
+     
+
+      /* texteare */
+
+      var ilk=document.getElementById("ilk").value;
+      
+      localStorage.setItem("sl",ilk);
+      alert("yeni metin oluşturuldu ")
+    }
+  </script>
+</body>
+</html>
